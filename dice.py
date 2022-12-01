@@ -6,7 +6,6 @@ Created on Wed Sep 21 10:28:24 2022
 @author: yulep
 """
 
-import csv
 from tkinter import *
 from random import randint
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, FigureCanvasAgg
@@ -18,14 +17,8 @@ import numpy as np
 from datetime import datetime, date
 import sys
 import matplotlib.pylab as plt
-import pandas as pd
-from numpy.fft import fft, ifft
   
 ######################### Saving #########################
-
-def save_to_csv(data_dict,title):
-    df = pd.DataFrame(data_dict) 
-    df.to_csv(title) 
 
 def save_to_txt(data,title):
     f=open(title,'w')
@@ -183,12 +176,15 @@ def Main_GUI():
             Manual_input_list = Manual_input.split("+")
             for cur in Manual_input_list:
                 cur_list = cur.split("d")
-                number = int(cur_list[0])
-                value = int(cur_list[1])
-                i = 0
-                while i < number:
-                    result += randint(1, value)
-                    i += 1
+                if len(cur_list) == 1:
+                    result += int(cur_list[0])
+                else:
+                    number = int(cur_list[0])
+                    value = int(cur_list[1])
+                    i = 0
+                    while i < number:
+                        result += randint(1, value)
+                        i += 1
 
             result_str = str(result).zfill(3)
             result_window.update(value = result_str)
