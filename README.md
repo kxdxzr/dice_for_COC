@@ -16,3 +16,10 @@ The biggest window is used to keep record of all the dice you have done, when th
 
 ## Further
 Still in developing and glad to solve bugs anyone raised.
+
+PC name entry will be done later.
+
+## Current bugs:
+Won't handle error input in manual dice.
+
+Some import packages are not used.
