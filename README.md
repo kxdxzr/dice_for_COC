@@ -12,3 +12,7 @@ Manully dice calculation is the button entry which takes in a format like 1d3 + 
 If you have two screen, the second window can be used to show the results and hide all the hidden dicing.
 
 The biggest window is used to keep record of all the dice you have done, when the function is closed by the "exit" button, it will be automaticly be saved into a log file.
+
+
+## Further
+Still in developing and glad to solve bugs anyone raised.
