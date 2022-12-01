@@ -13,11 +13,15 @@ If you have two screen, the second window can be used to show the results and hi
 
 The biggest window is used to keep record of all the dice you have done, when the function is closed by the "exit" button, it will be automaticly be saved into a log file.
 
+The color of the result will change when 1d100 > 95 or < 5 for the indication of Fumbles and Criticals.
+
 
 ## Further
 Still in developing and glad to solve bugs anyone raised.
 
 PC name entry will be done later.
+
+Fumbles and Criticals range will be available to be set.
 
 ## Current bugs:
 Won't handle error input in manual dice.
