@@ -3,20 +3,14 @@
 """
 Created on Wed Sep 21 10:28:24 2022
 
-@author: yulep
+@author: yuleping
 """
 
-from tkinter import *
 from random import randint
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, FigureCanvasAgg
-from matplotlib.figure import Figure
-import tkinter as Tk
 import PySimpleGUI as sg
-import time
 import numpy as np
 from datetime import datetime, date
 import sys
-import matplotlib.pylab as plt
   
 ######################### Saving #########################
 
@@ -42,19 +36,23 @@ def Log(Info):
 def random(value):
     result = randint(1, value)
     result_str = str(result).zfill(3)
+    Fumbles_value = int(values["Fumbles"])
+    Criticals_value = int(values["Criticals"])
+    PC_name = values["PC"]
+    
     color = "Black"
-    if result > 94 and value == 100:
+    if result > Fumbles_value - 1 and value == 100:
         color = "Red"
-    elif result < 6 and value == 100:
+    elif result < Criticals_value + 1 and value == 100:
         color = "Yellow"
     result_window.update(value = result_str, text_color = color)
     if Showing == "Show":
-        result_window2.update(value = "1d{}: {} {}".format(value,skill_name,result_str), 
+        result_window2.update(value = "{} {} 1d{}: {}".format(PC_name,skill_name, value,result_str), 
                              text_color = color)
     else:
-        result_window2.update(value = "1d{}: {} {}".format("?","暗投","???"), 
+        result_window2.update(value = "{} {} 1d{}: {}".format(PC_name,"暗投","?","???"), 
                              text_color = "Black")
-    Log("1d{}: {} {}".format(value,skill_name,result_str))
+    Log("{} {} 1d{}: {}".format(PC_name,skill_name,value,result_str))
 
 
 log_list = []
@@ -64,33 +62,12 @@ def Main_GUI():
     
     ############# initial value #############
     sg_theme = sg.theme("Default1")
-    text_size = 18
-    last_time = 0
-    ran = 1
-    tranmission_stable = True
-    raw_y_list = []
-    processed_y_list = []
-    ploting_length = 5;
-    raw_y_list = []
-    high_warning = 100
-    low_warning = 50
-    Pulse_Ploting = "Processed"
-    current = 0
-    previous = 0
-    first = True
-    started = False
-    tranmission_stable_time = True
-    tranmission_stable_sequence = True
-    tranmission_stop = False
-    heart_rate_value = 70
+
     
     ############## log control ###############
-    low_heart_rate_not_logged = True
-    high_heart_rate_not_logged = True
-    Tranmission_stop_by_user_not_logged = True
-    Tranmission_unstable_not_logged = True
     global Showing
     Showing = "Show"
+    global values
     ############## log control ###############
     
     
@@ -98,40 +75,62 @@ def Main_GUI():
     
     ############# initial value #############
     Column1 = sg.Column([
+        [sg.Text("Skill Name",font = ("Times New Roman",12))],
         [sg.Input(default_text = "",
-                  size = (6, 2), 
+                  size = (10, 2), 
                   key=("Skill"),
                   enable_events = True),],
-        [sg.Button('1d3', key='1d3',size = (6,2))],
-        [sg.Button('1d4', key='1d4',size = (6,2))],
-        [sg.Button('1d6', key='1d6',size = (6,2))],
-        [sg.Button('1d10', key='1d10',size = (6,2))],
-        [sg.Button('1d100', key='1d100',size = (6,2))],
-        [sg.Button('Calculate', key='Cal_Manual',size = (6,2))],
+        [sg.Text("PC Name",font = ("Times New Roman",12))],
+        [sg.Input(default_text = "",
+                  size = (10, 2), 
+                  key=("PC"),
+                  enable_events = True),],
+        [sg.Button('1d3', key='1d3',size = (10,2))],
+        [sg.Button('1d4', key='1d4',size = (10,2))],
+        [sg.Button('1d6', key='1d6',size = (10,2))],
+        [sg.Button('1d8', key='1d8',size = (10,2))],
+        [sg.Button('1d10', key='1d10',size = (10,2))],
+        [sg.Button('1d100', key='1d100',size = (10,2))],
+        [sg.Button('Calculate', key='Cal_Manual',size = (10,2))],
+        ])
+    Column2 = sg.Column([
+        [sg.Text("Result",font = ("Times New Roman",12))],
+        [sg.Text("000",key = "Result_Text",
+                 font = ("Times New Roman",40))],
+        [sg.Text("Log ",font = ("Times New Roman",12))],
+        [sg.Listbox([],size = (40, 15),key = "Log")],
+        [sg.Text("Customized Dice",font = ("Times New Roman",12))],
+        [sg.Input(default_text = "",
+                  size = (40, 8), 
+                  key=("Manual"),
+                  enable_events = True),]
+        ])
+    Column3 = sg.Column([
+        [sg.Text("Fumbles",font = ("Times New Roman",12))],
+        [sg.Input(default_text = "96",
+                  size = (4, 2), 
+                  key=("Fumbles"),
+                  enable_events = True)],
+        [sg.Text("Criticals",font = ("Times New Roman",12))],
+        [sg.Input(default_text = "05",
+                  size = (4, 2), 
+                  key=("Criticals"),
+                  enable_events = True)],
+        [sg.Text("Show Results?",font = ("Times New Roman",12))],
         [sg.Spin(["Show","Hide"],
                  size = (10,30),
                  enable_events=True,
                  key = "Choose_show",
                  initial_value = "Show")]
         ])
-    Column2 = sg.Column([
-        [sg.Text("000",key = "Result_Text",
-                 font = ("Times New Roman",40))],
-        [sg.Listbox([],size = (40, 15),key = "Log")],
-        [sg.Input(default_text = "",
-                  size = (40, 8), 
-                  key=("Manual"),
-                  enable_events = True),]
-        ])
-    
     layout = [
-        [Column1,Column2,
+        [Column1,Column2,Column3
          ],
         [sg.Button('Exit', key='EXIT_BUTTON',size = (5,2))],
         ]
     
     layout2 = [
-        [sg.Text("1d???: ？？ 000",key = "Showing",
+        [sg.Text("1d???: ? ?  000",key = "Showing",
              font = ("Times New Roman",80))]
         ]
     
@@ -153,6 +152,7 @@ def Main_GUI():
     while True:
         event, values = window.read(timeout=0.1)
         skill_name = values["Skill"]
+        
         if event in ['EXIT_BUTTON', sg.WIN_CLOSED]:
                 Log("Exiting")
                 save_to_txt(log_list,"log.log")
@@ -166,6 +166,8 @@ def Main_GUI():
             random(4)
         elif event == '1d6':
             random(6)
+        elif event == '1d8':
+            random(8)    
         elif event == '1d10':
             random(10)
         elif event == '1d100':
@@ -188,7 +190,10 @@ def Main_GUI():
 
             result_str = str(result).zfill(3)
             result_window.update(value = result_str)
-            Log("{}:{} {}".format(Manual_input,skill_name,result_str))
+            
+            result_window2.update(value = "{} {} {}: {}".format(PC_name, skill_name,Manual_input,result_str))
+            
+            Log("{} {}:{} {}".format(PC_name, Manual_input,skill_name,result_str))
         elif event == "Choose_show":
             Showing = values["Choose_show"]
         else:
