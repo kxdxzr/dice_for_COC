@@ -1,4 +1,6 @@
 # dice_for_COC
+dice_EN for English user
+dice_CN for Chinese user
 
 ## Package needed
 datetime, numpy, PySimpleGUI
