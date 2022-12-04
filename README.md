@@ -1,7 +1,7 @@
 # dice_for_COC
 
 ## Package needed
-datetime, random, numpy, PySimpleGUI
+datetime, numpy, PySimpleGUI
 
 ## Appearance
 This is a dice made for call of cthulhu a table RPG.
