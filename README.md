@@ -21,7 +21,7 @@ datetime, numpy, PySimpleGUI
 
 如果拥有两个屏幕，可以使用“front_end”窗口来展示结果。
 
-The biggest window is used to keep record of all the dice you have done, when the function is closed by the "exit" button, it will be automaticly be saved into a log file.
+中间的日志窗口会显示所有投掷结果，当关闭程序时，日志会自动保存到log.log 文件中
 
 当1d100随机到大成功与大失败的值时，结果颜色会发生变化，默认大成功大失败值为5 和 96， 该值可改变。
 
