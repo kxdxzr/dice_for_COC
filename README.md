@@ -3,6 +3,7 @@
 ## Package needed
 datetime, random, numpy, PySimpleGUI
 
+## Appearance
 This is a dice made for call of cthulhu a table RPG.
 ![image](https://user-images.githubusercontent.com/74366156/205445017-14b82654-eef1-4514-aba9-149843b40fbf.png)
 
