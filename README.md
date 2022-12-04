@@ -23,4 +23,4 @@ Still in developing and glad to solve bugs anyone raised.
 Deal with some bugs.
 
 ## Current bugs:
-Won't handle error input in manual dice.
+Won't handle error input in customized dice.
