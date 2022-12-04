@@ -1,8 +1,7 @@
 # dice_for_COC
 
-<div align="center">
 [简体中文](README.md) | [English](README_EN.md)
-</div>
+
 
 dice_EN 英文
 
