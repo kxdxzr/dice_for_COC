@@ -1,6 +1,6 @@
 # dice_for_COC
 
-For English readme: https://github.com/kxdxzr/dice_for_COC/blob/main/README_EN.md
+[简体中文](README.md) | [English](README_EN.md)
 
 dice_EN 英文
 
