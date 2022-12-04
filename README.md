@@ -1,4 +1,7 @@
 # dice_for_COC
+
+For English readme: https://github.com/kxdxzr/dice_for_COC/blob/main/README_EN.md
+
 dice_EN 英文
 
 dice_CN 中文
