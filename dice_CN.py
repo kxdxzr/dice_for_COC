@@ -19,6 +19,11 @@ def save_to_txt(data,title):
     np.savetxt(f,data,delimiter=',',fmt='%s') 
     f.close() 
 
+def load_from_log(title):
+    f=open(title,'r')
+    ls = f.read().split("\n")
+    ls.remove('')
+    return ls   
 ######################### Saving #########################
 
 
@@ -55,14 +60,14 @@ def random(value):
     Log("{} {} 1d{}: {}".format(PC_name,skill_name,value,result_str))
 
 
-log_list = []
 
 
 def Main_GUI():
     
     ############# initial value #############
     sg_theme = sg.theme("Default1")
-
+    global log_list
+    log_list = []
     
     ############## log control ###############
     global Showing
@@ -121,7 +126,8 @@ def Main_GUI():
                  size = (10,30),
                  enable_events=True,
                  key = "Choose_show",
-                 initial_value = "Show")]
+                 initial_value = "Show")],
+        [sg.Button('加载日志', key='load',size = (10,2))]
         ])
     layout = [
         [Column1,Column2,Column3],
@@ -187,13 +193,17 @@ def Main_GUI():
                         i += 1
 
             result_str = str(result).zfill(3)
-            result_window.update(value = result_str)
+            result_window.update(value = result_str, text_color = "Black")
             
-            result_window2.update(value = "{} {} {}: {}".format(PC_name, skill_name,Manual_input,result_str))
+            result_window2.update(value = "{} {} {}: {}".format(PC_name, skill_name,Manual_input,result_str),text_color = "Black")
             
-            Log("{} {} ： {} {}".format(PC_name, skill_name, Manual_input,result_str))
+            Log("{} {} {}: {}".format(PC_name, skill_name, Manual_input,result_str))
         elif event == "Choose_show":
             Showing = values["Choose_show"]
+        elif event == "load":
+            log_list = load_from_log('log.log')
+            print(log_list)
+            log_window.update(values = log_list, scroll_to_index = len(log_list))
         else:
             pass
         ##################### GUI Handling #####################
