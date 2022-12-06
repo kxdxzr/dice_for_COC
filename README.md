@@ -34,4 +34,4 @@ datetime, numpy, PySimpleGUI
 处理bug.
 
 ## 当前bug:
-无法处理非法自定义骰子输入
+
