@@ -41,15 +41,23 @@ def Log(Info):
 def random(value):
     result = randint(1, value)
     result_str = str(result).zfill(3)
-    Fumbles_value = int(values["Fumbles"])
-    Criticals_value = int(values["Criticals"])
+    try:
+        Fumbles_value = int(values["Fumbles"])
+    except:
+        result_window.update(value = "大失败错误", text_color = "Red")
+        return
+    try:
+        Criticals_value = int(values["Criticals"])
+    except:
+        result_window.update(value = "大成功错误", text_color = "Red")
+        return
     PC_name = values["PC"]
     
     color = "Black"
     if result > Fumbles_value - 1 and value == 100:
         color = "Red"
     elif result < Criticals_value + 1 and value == 100:
-        color = "Yellow"
+        color = "Gold"
     result_window.update(value = result_str, text_color = color)
     if Showing == "Show":
         result_window2.update(value = "{} {} 1d{}: {}".format(PC_name,skill_name, value,result_str), 
@@ -158,7 +166,6 @@ def Main_GUI():
         event, values = window.read(timeout=0.1)
         if event in ['EXIT_BUTTON', sg.WIN_CLOSED]:
             save_to_txt(log_list,"log.log")
-            print("close")
             window.close()
             window2.close()
             return
@@ -179,31 +186,36 @@ def Main_GUI():
         elif event == "Cal_Manual":
             result = 0
             Manual_input = values["Manual"]
-            Manual_input_list = Manual_input.split("+")
-            for cur in Manual_input_list:
-                cur_list = cur.split("d")
-                if len(cur_list) == 1:
-                    result += int(cur_list[0])
-                else:
-                    number = int(cur_list[0])
-                    value = int(cur_list[1])
-                    i = 0
-                    while i < number:
-                        result += randint(1, value)
-                        i += 1
-
-            result_str = str(result).zfill(3)
-            result_window.update(value = result_str, text_color = "Black")
-            
-            result_window2.update(value = "{} {} {}: {}".format(PC_name, skill_name,Manual_input,result_str),text_color = "Black")
-            
-            Log("{} {} {}: {}".format(PC_name, skill_name, Manual_input,result_str))
+            try:
+                Manual_input_list = Manual_input.split("+")
+                for cur in Manual_input_list:
+                    cur_list = cur.split("d")
+                    if len(cur_list) == 1:
+                        result += int(cur_list[0])
+                    else:
+                        number = int(cur_list[0])
+                        value = int(cur_list[1])
+                        i = 0
+                        while i < number:
+                            result += randint(1, value)
+                            i += 1
+    
+                result_str = str(result).zfill(3)
+                result_window.update(value = result_str, text_color = "Black")
+                
+                result_window2.update(value = "{} {} {}: {}".format(PC_name, skill_name,Manual_input,result_str),text_color = "Black")
+                
+                Log("{} {} {}: {}".format(PC_name, skill_name, Manual_input,result_str))
+            except:
+                result_window.update(value = "输入错误", text_color = "Red")
         elif event == "Choose_show":
             Showing = values["Choose_show"]
         elif event == "load":
-            log_list = load_from_log('log.log')
-            print(log_list)
-            log_window.update(values = log_list, scroll_to_index = len(log_list))
+            try:
+                log_list = load_from_log('log.log')
+                log_window.update(values = log_list, scroll_to_index = len(log_list))
+            except:
+                result_window.update(value = "无日志文件", text_color = "Red")
         else:
             pass
         ##################### GUI Handling #####################
