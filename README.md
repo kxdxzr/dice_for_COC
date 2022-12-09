@@ -10,6 +10,14 @@ dice_CN 中文
 ## 需要的包
 datetime, numpy, PySimpleGUI
 
+
+```bash
+pip install DateTime
+pip install PySimpleGUI
+pip install numpy
+```
+
+
 ## 外观
 ![image](https://user-images.githubusercontent.com/74366156/205477370-23b44c54-612e-4bdf-9239-9869158d939f.png)
 
