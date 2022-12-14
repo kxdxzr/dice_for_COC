@@ -5,6 +5,11 @@ dice_CN for Chinese user
 
 ## Package needed
 datetime, numpy, PySimpleGUI
+```bash
+pip install DateTime
+pip install PySimpleGUI
+pip install numpy
+```
 
 ## Appearance
 This is a dice made for call of cthulhu a table RPG.
