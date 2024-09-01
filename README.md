@@ -3,7 +3,7 @@
 [简体中文](README.md) | [English](README_EN.md)
 
 
-dice_EN 英文
+dice_EN English
 
 dice_CN 中文
 
