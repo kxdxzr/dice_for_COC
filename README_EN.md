@@ -18,7 +18,7 @@ This is a dice made for call of cthulhu a table RPG.
 ![image](https://user-images.githubusercontent.com/74366156/205445037-6f407b36-bc0e-4d66-aeab-a7a5dbfacf56.png)
 
 ## Function
-There are several commonly used dice involved including 1d3, 1d4, 1d6, 1d8, 1d100.
+There are several commonly used dice including 1d3, 1d4, 1d6, 1d8, 1d100.
 
 Manully dice calculation is the button entry which takes in a format like 1d3 + 2d6 + 2
 
