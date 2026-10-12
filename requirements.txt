@@ -1,0 +1,3 @@
+FreeSimpleGUI>=5.0
+# PySimpleGUI also works if you already have it (same API).
+# numpy is NOT needed since v2.0.
