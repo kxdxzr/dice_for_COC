@@ -32,9 +32,17 @@ Requires only `FreeSimpleGUI` (free fork of PySimpleGUI, same API; old `PySimple
 
 ## 外观 / Screenshots
 
-![image](https://user-images.githubusercontent.com/74366156/205477370-23b44c54-612e-4bdf-9239-9869158d939f.png)
+中文版 / Chinese:
 
-![image](https://user-images.githubusercontent.com/74366156/205477372-685b03a1-385b-4ffb-a9e6-a97864192eea.png)
+![中文版](screenshots/main_zh.png)
+
+英文版 / English:
+
+![English](screenshots/main_en.png)
+
+投屏窗口 / Front_end window:
+
+![Front_end](screenshots/frontend.png)
 
 ## 功能 / Features
 
